@@ -12,7 +12,7 @@ def create_app():
     app = Flask(__name__)
 
     # Set up configuration
-    app.config['SECRET_KEY'] = os.getenv('FLASK_SECRET_KEY')
+    app.config['SECRET_KEY'] = "fewguivcdslhijbfeabfewLUZIG534%!+fw@@"
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'  # SQLite for now, change to Postgres if needed
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
