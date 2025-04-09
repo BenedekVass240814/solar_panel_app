@@ -1,0 +1,15 @@
+runtime: python39  # We use Python 3.9 as the runtime for the app
+entrypoint: gunicorn -b :$PORT run:app  # Using Gunicorn to serve the Flask app
+
+env_variables:
+  FLASK_ENV: "production"
+  FLASK_APP: "run.py"
+
+# Instance class (you can change this to handle higher traffic)
+instance_class: F2
+
+# Optional: Configure automatic scaling
+automatic_scaling:
+  target_cpu_utilization: 0.65
+  min_instances: 1
+  max_instances: 10
