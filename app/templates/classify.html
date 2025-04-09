@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="form-container">
+        <h2>Classify Solar Panel Image</h2>
+        <form action="{{ url_for('main.classify') }}" method="POST" enctype="multipart/form-data">
+            <label for="image">Upload an image:</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+            <button type="submit">Classify</button>
+        </form>
+
+        {% if result %}
+            <h3>Classification Result: {{ result }}</h3>
+            <img src="{{ image_path }}" alt="Uploaded Image" 
+                 style="max-width: 500px; display: block; margin-top: 15px; margin-left: auto; margin-right: auto; width: 100%; height: auto;">
+            
+            <!-- Feedback Section -->
+            <div class="feedback-section">
+                <p>Was this classification correct?</p>
+                <form action="{{ url_for('main.submit_feedback') }}" method="POST">
+                    <input type="hidden" name="classification_result" value="{{ result }}">
+                    <button type="submit" name="feedback" value="like" class="feedback-button like-button">👍 Like</button>
+                    <button type="submit" name="feedback" value="dislike" class="feedback-button dislike-button">👎 Dislike</button>
+                </form>
+            </div>
+        {% endif %}
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul>
+                    {% for category, message in messages %}
+                        <li class="flash-message {{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+{% endblock %}

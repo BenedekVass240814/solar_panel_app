@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="profile-container">
+    <h1>Welcome, {{ session.get('username') }}</h1>
+
+    <h3>Your Classification History:</h3>
+    
+    {% if user_history %}
+        <div class="history-grid">
+            {% for item in user_history %}
+                <div class="history-card">
+                    <img src="{{ url_for('static', filename=item.image_path) }}" alt="User Image">
+                    <p>{{ item.action }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>You haven't uploaded any images yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

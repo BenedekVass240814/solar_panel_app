@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Panel Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<!-- Navigation Bar -->
+<nav>
+    <ul class="nav-left">
+        <li><a href="{{ url_for('main.home') }}">Home</a></li>
+        <li><a href="{{ url_for('main.about') }}">About</a></li>
+        <li><a href="{{ url_for('main.classify') }}">Classify</a></li>
+    </ul>
+
+    <ul class="nav-right">
+        {% if session.get('user_id') %}
+            <li><a href="{{ url_for('main.profile') }}">Welcome, {{ session.get('username') }}</a></li>
+            <li><a href="{{ url_for('main.logout') }}">Logout</a></li>
+        {% else %}
+            <li><a href="{{ url_for('main.login') }}">Login</a></li>
+            <li><a href="{{ url_for('main.register') }}">Register</a></li>
+        {% endif %}
+    </ul>
+</nav>
+
+
+<!-- Page Content -->
+<div class="content">
+    {% block content %}{% endblock %}
+</div>
+
+</body>
+</html>
